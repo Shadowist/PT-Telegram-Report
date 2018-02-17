@@ -11,3 +11,11 @@ def receive_cfg():
                 output_dict[parsed_line[0]] = parsed_line[1]
 
     return output_dict
+
+def show_commands():
+    '''Returns a string with the list of commands'''
+
+    text = "I support the following commands:\n"
+    text += "1. /start\n"
+
+    return text
