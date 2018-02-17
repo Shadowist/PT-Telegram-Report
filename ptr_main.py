@@ -9,6 +9,7 @@ from telegram.ext import Updater
 
 # Local Import
 import ptr_utils
+import ptr_report
 CONFIG = ptr_utils.receive_cfg()
 
 updater = Updater(token=CONFIG['token'])
@@ -30,6 +31,11 @@ def help(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text=ptr_utils.show_commands())
 help_handler = CommandHandler('help', help)
 dispatcher.add_handler(help_handler)
+
+def report(bot, update):
+    bot.send_message(chat_id=update.message.chat_id, text=ptr_report.return_logs(CONFIG))
+report_handler = CommandHandler('report', report)
+dispatcher.add_handler(report_handler)
 
 # Command: /caps "input"
 def caps(bot, update, args):
