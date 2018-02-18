@@ -23,7 +23,8 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 # Command: /start
 def start(bot, update):
-    bot.send_message(chat_id=update.message.chat_id, text="I'm a bot, please talk to me!")
+    bot.send_message(chat_id=update.message.chat_id, text="Hi! :)")
+    bot.send_message(chat_id=update.message.chat_id, text=ptr_utils.show_commands())
 start_handler = CommandHandler('start', start)
 dispatcher.add_handler(start_handler)
 
@@ -32,10 +33,21 @@ def help(bot, update):
 help_handler = CommandHandler('help', help)
 dispatcher.add_handler(help_handler)
 
-def report(bot, update):
-    bot.send_message(chat_id=update.message.chat_id, text=ptr_report.return_logs(CONFIG))
-report_handler = CommandHandler('report', report)
+def report(bot, update, args):
+    if len(args) > 1:
+        bot.send_message(chat_id=update.message.chat_id, text="Incorrect argument. Format: /report num_days.")
+    elif not args[0].isdigit():
+        bot.send_message(chat_id=update.message.chat_id, text="Incorrect argument. Bot supports numbers only! Format: /report num_days.")
+    else:
+        bot.send_message(chat_id=update.message.chat_id, text="Generating {} day report...".format(int(args[0])))
+        bot.send_message(chat_id=update.message.chat_id, text=ptr_report.return_logs(CONFIG, args))
+report_handler = CommandHandler('report', report, pass_args=True)
 dispatcher.add_handler(report_handler)
+
+def donate(bot, update):
+    bot.send_message(chat_id=update.message.chat_id, text="Support development (or buy me a beer) by donating LTC here: LeVVJYFuPa5gPVtUCpz8vY2U5EGYL1zKDd")
+donate_handler = CommandHandler('donate', donate)
+dispatcher.add_handler(donate_handler)
 
 # Command: /caps "input"
 def caps(bot, update, args):

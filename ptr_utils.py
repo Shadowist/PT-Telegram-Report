@@ -22,10 +22,11 @@ def receive_cfg():
 def show_commands():
     '''Returns a string with the list of commands'''
 
-    text = "I support the following commands:\n"
+    text = "The following commands are supported:\n"
     text += "1. /start\n"
     text += "2. /report - Generates logs using the supplied configuration.\n"
-    text += "3. /help\n"
+    text += "3. /donate\n"
+    text += "4. /help\n"
     
 
     return text
