@@ -51,6 +51,7 @@ def summarize_log(log, days, start_date, end_date):
     enough_vol = 0
     exceed_bal = 0
     apikey_invalid = 0
+    java_errors = 0
 
     for line in log:
         if "Normal Heartbeat" in line:
@@ -67,6 +68,8 @@ def summarize_log(log, days, start_date, end_date):
             apikey_invalid += 1
         elif "Buy will exceed min buy balance" in line:
             exceed_bal += 1
+        elif "java" in line:
+            java_errors += 1
 
     string_export = "{} Day Report\n".format(days)
     string_export += "Start Date: {}\n".format(start_date)
@@ -79,6 +82,7 @@ def summarize_log(log, days, start_date, end_date):
     string_export += "{} not enough volume events\n".format(enough_vol)
     string_export += "{} buy exceed balance events\n".format(exceed_bal)
     string_export += "{} APIKEY_INVALID events\n".format(apikey_invalid)
+    string_export += "{} Java events\n".format(java_errors)
 
     return string_export
 
