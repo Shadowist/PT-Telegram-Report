@@ -11,6 +11,7 @@ def get_log(file, days=1):
     string_export = []
     start_date_grabbed = False
     start_date = None
+    end_date = None
     test_date = None
 
     for line in reversed_lines(file):
@@ -32,10 +33,14 @@ def get_log(file, days=1):
             if ((start_date - test_date).days >= days):
                 del string_export[-1]
                 break
+            else:
+                end_date = test_date
 
-    return string_export
+    summary = summarize_log(string_export, days, end_date, start_date)
 
-def summarize_log(log, days):
+    return summary
+
+def summarize_log(log, days, start_date, end_date):
     ''' Provides a simple sumarization of overall logs. '''
     string_export = ""
 
@@ -64,6 +69,8 @@ def summarize_log(log, days):
             exceed_bal += 1
 
     string_export = "{} Day Report\n".format(days)
+    string_export += "Start Date: {}\n".format(start_date)
+    string_export += "End Date: {}\n".format(end_date)
     string_export += "====================\n"
     string_export += "{} Normal Heartbeats\n".format(normal_heartbeats)
     string_export += "{} Cache Heartbeats\n".format(cache_heartbeats)
@@ -149,7 +156,7 @@ def return_logs(config_dict, args):
     '''Parses and returns the selected logs.'''
     f = open(LOG_FILE, 'r')
     log = get_log(f, int(args[0]))
-    report = summarize_log(log, int(args[0]))
+    # report = summarize_log(log, int(args[0]))
     f.close()
 
-    return report
+    return log
