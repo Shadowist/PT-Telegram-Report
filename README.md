@@ -23,4 +23,4 @@ Installation
 
 This thing is a little bit of a side project for me. I'd love to have it do automatic reporting and various other things.
 
-If this project is of use and you want to donate (or buy me a beer), please donate some LTC here: LeVVJYFuPa5gPVtUCpz8vY2U5EGYL1zKDd
+If this project is of use and you want to donate (or buy me a beer), please donate some LTC here: LWdJi2JSKperp6gkcmXGSPtvTNg7sLZ8Ta
